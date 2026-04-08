@@ -1,7 +1,6 @@
 8- Crie um programa que contenha um array de inteiros contendo 5 elementos.
 Utilizando apenas aritmética de ponteiros, leia esse array do teclado e imprima o dobro de cada valor lido.
-
-*Código
+-Código
 #include <stdio.h>
 
 int main() { int array[5];
@@ -24,11 +23,13 @@ printf("\n");
 
 return 0;
 }
+-Explicação: Nesse programa eu usei ponteiros para ler 5 números e guardar em um array.Ao invés de usar [], eu usei aritmética de ponteiros para acessar os valores.
+Depois mostro os números digitados e também o dobro de cada um.
+
 
 
 9- Faça um programa que leia três valores inteiros e salve seus valores em 3 variáveis, chame uma função que receba estes 3 valores de entrada por referência e ordene os valores nas variáveis, ou seja, o menor valor na primeira variável, o segundo menor valor na variável do meio, e o maior valor na última variável. A função deve retornar o valor 1 se os três valores forem iguais e 0 se existirem valores diferentes. Fora da função, exibir os valores da primeira, segunda e terceira variáveis na tela.
-
-*Código
+-Código
 #include <stdio.h>
 int ordenar(int *a, int *b, int *c) { int temp;
 
@@ -70,11 +71,13 @@ printf("\nOs valores são diferentes.\n");
 
 return 0;
 }
+-Explicação: Aqui eu li três valores inteiros e usei uma função para ordenar eles. Passei os valores por referência usando ponteiros, então a função altera direto nas variáveis. Usei comparações para trocar os valores e deixar em ordem crescente.
+No final, mostro os valores já ordenados. A função também retorna 1 se os três valores forem iguais, ou 0 se forem diferentes.
+
 
 
 10- Implemente um programa em C que defina uma struct chamada Aluno contendo os campos nome (string) e nota (float). O programa deve ler um inteiro n e alocar dinamicamente memória para armazenar n alunos. Em seguida, implemente uma função chamada maiorNota que receba um ponteiro para Aluno e a quantidade de elementos, e retorne um ponteiro para o aluno com a maior nota.
-
-*Código
+-Código
 #include <stdio.h> 
 #include <stdlib.h>
 
@@ -119,3 +122,6 @@ free(alunos);
 
 return 0;
 }
+-Explicação: Aqui eu criei uma struct chamada Aluno com nome e nota. Usei malloc para alocar memória dinamicamente para vários alunos.Depois li os dados de cada aluno usando ponteiros.
+Criei uma função que percorre os alunos e encontra quem tem a maior nota. No final, mostro o aluno com a maior nota e libero a memória com free.
+
