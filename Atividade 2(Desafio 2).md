@@ -1,27 +1,36 @@
+Desafio 2
+Implemente um programa em C que receba uma string e retorne essa string invertida utilizando uma pilha.
+
+Requisitos
+Implementar a pilha manualmente utilizando struct e alocação dinâmica.
+Inserir cada caractere da string na pilha.
+Utilizar a pilha para gerar a string invertida.
+Restrições
+Não utilizar funções prontas para inverter string.
+Não utilizar vetor auxiliar para armazenar a string invertida.
+Manipular apenas via operações da pilha.
+
+Código:
+
 #include <stdio.h>
 #include <stdlib.h>
-
 
 typedef struct No {
     char dado;
     struct No* prox;
 } No;
 
-
 typedef struct {
     No* topo;
 } Pilha;
-
 
 void inicializar(Pilha* p) {
     p->topo = NULL;
 }
 
-
 int estaVazia(Pilha* p) {
     return (p->topo == NULL);
 }
-
 
 void push(Pilha* p, char c) {
     No* novo = (No*) malloc(sizeof(No));
@@ -33,7 +42,6 @@ void push(Pilha* p, char c) {
     novo->prox = p->topo;
     p->topo = novo;
 }
-
 
 char pop(Pilha* p) {
     if (estaVazia(p)) {
