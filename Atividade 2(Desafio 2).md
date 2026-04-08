@@ -14,27 +14,22 @@ Código:
 #include <stdio.h>
 #include <stdlib.h>
 
-
 typedef struct No {
     char dado;
     struct No* prox;
 } No;
 
-
 typedef struct {
     No* topo;
 } Pilha;
-
 
 void inicializar(Pilha* p) {
     p->topo = NULL;
 }
 
-
 int estaVazia(Pilha* p) {
     return (p->topo == NULL);
 }
-
 
 void push(Pilha* p, char c) {
     No* novo = (No*) malloc(sizeof(No));
@@ -46,7 +41,6 @@ void push(Pilha* p, char c) {
     novo->prox = p->topo;
     p->topo = novo;
 }
-
 
 char pop(Pilha* p) {
     if (estaVazia(p)) {
@@ -69,22 +63,17 @@ int main() {
     printf("Digite uma string: ");
     fgets(str, sizeof(str), stdin);
 
-   
     for (int i = 0; str[i] != '\0'; i++) {
         if (str[i] != '\n') { 
             push(&p, str[i]);
         }
     }
-
     printf("String invertida: ");
 
-   
     while (!estaVazia(&p)) {
         printf("%c", pop(&p));
     }
-
     printf("\n");
-
     return 0;
 }
 
