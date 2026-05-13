@@ -1,0 +1,82 @@
+-CÓDIGO DO EXERCÍCIO 3
+
+#include <stdio.h>
+
+// Funcao recursiva para resolver as Torres de Hanoi
+void torresDeHanoi(int discos, char origem, char destino, char auxiliar, int *movimentos) {
+
+    // Caso base:
+    // Se existir apenas 1 disco, move diretamente para o destino.
+    if (discos == 1) {
+        printf("Mover disco 1 de %c para %c\n", origem, destino);
+        (*movimentos)++;
+        return;
+    }
+
+    // Reducao do problema:
+    // Move os discos menores para a torre auxiliar,
+    // depois move o maior disco,
+    // e por fim move novamente os discos menores para o destino.
+
+    torresDeHanoi(discos - 1, origem, auxiliar, destino, movimentos);
+
+    printf("Mover disco %d de %c para %c\n", discos, origem, destino);
+    (*movimentos)++;
+
+    torresDeHanoi(discos - 1, auxiliar, destino, origem, movimentos);
+}
+
+int main() {
+
+    int discos;
+    int movimentos = 0;
+
+    printf("Digite a quantidade de discos: ");
+    scanf("%d", &discos);
+
+    printf("\nMovimentos realizados:\n\n");
+
+    torresDeHanoi(discos, 'A', 'C', 'B', &movimentos);
+
+    printf("\nTotal de movimentos: %d\n", movimentos);
+
+    return 0;
+}
+
+
+-EXEMPLO:
+
+#Exemplo de entrada
+Digite a quantidade de discos: 3
+
+#Exemplo de saída
+Movimentos realizados:
+
+Mover disco 1 de A para C
+Mover disco 2 de A para B
+Mover disco 1 de C para B
+Mover disco 3 de A para C
+Mover disco 1 de B para A
+Mover disco 2 de B para C
+Mover disco 1 de A para C
+
+Total de movimentos: 7
+
+-EXPLICAÇÃO:
+A saída dá 7 movimentos quando usamos 3 discos porque a Torre de Hanoi segue esta fórmula:
+
+2
+n (2 elevado a N menos 1)
+−1
+
+Onde:
+
+n = quantidade de discos.
+
+Então, para 3 discos:
+
+2³ - 1
+8 - 1
+7
+
+Ou seja, são necessários exatamente 7 movimentos para mover todos os discos corretamente.
