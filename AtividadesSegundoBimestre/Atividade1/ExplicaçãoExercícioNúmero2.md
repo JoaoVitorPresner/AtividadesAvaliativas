@@ -20,3 +20,5 @@ Chamadas recursivas ingenuas: 177
 Fibonacci com memoizacao(10) = 55
 Chamadas recursivas com memoizacao: 19
 Nesse exemplo, é possível perceber claramente a diferença de eficiência entre os dois métodos. Enquanto a versão ingênua realizou 177 chamadas recursivas, a versão com memoização precisou de apenas 19 chamadas para obter o mesmo resultado.
+
+
