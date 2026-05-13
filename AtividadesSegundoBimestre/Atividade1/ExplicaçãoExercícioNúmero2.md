@@ -1,4 +1,4 @@
-Neste programa foi utilizada a técnica de memoização, uma estratégia usada para melhorar o desempenho de algoritmos recursivos.
+Neste programa foi utilizada a técnica de memorização, uma estratégia usada para melhorar o desempenho de algoritmos recursivos.
 
 A memoização funciona armazenando resultados que já foram calculados anteriormente, evitando que o programa repita os mesmos cálculos várias vezes. Isso torna a execução muito mais rápida e eficiente.
 
