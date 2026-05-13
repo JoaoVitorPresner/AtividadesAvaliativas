@@ -1,4 +1,5 @@
 -EXPLICAÇÃO:
+
 Esse código resolve o problema das Torres de Hanoi utilizando recursão, mostrando passo a passo os movimentos necessários para mover todos os discos da torre de origem até a torre de destino e contabilizando o total de movimentos realizados. 
 Esse código utiliza a fórmula (dois elevado a N menos um).
 
