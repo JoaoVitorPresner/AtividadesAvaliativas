@@ -1,4 +1,4 @@
--CÓDIGO DO EXERCÍCIO 3
+
 
 #include <stdio.h>
 
