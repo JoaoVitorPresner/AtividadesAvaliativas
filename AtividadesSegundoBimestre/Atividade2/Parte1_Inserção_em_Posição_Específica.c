@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct NoSimples {
     int valor;
     struct NoSimples *prox;
@@ -77,4 +80,27 @@ void inserirPosicao(NoSimples **head, int valor, int posicao) {
 
     novo->prox = temp->prox;
     temp->prox = novo;
+}
+
+int main() {
+
+    NoSimples *lista = NULL;
+
+    /* Inserindo elementos no final */
+    inserirFinal(&lista, 10);
+    inserirFinal(&lista, 20);
+    inserirFinal(&lista, 30);
+
+    printf("Lista original:\n");
+    exibirLista(lista);
+
+    /* Inserindo em posições específicas */
+    inserirPosicao(&lista, 5, 0);   // início
+    inserirPosicao(&lista, 15, 2);  // meio
+    inserirPosicao(&lista, 40, 5);  // final
+
+    printf("\nLista apos insercoes:\n");
+    exibirLista(lista);
+
+    return 0;
 }
