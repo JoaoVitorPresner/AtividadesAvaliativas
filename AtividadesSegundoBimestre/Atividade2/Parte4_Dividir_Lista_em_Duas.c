@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct NoSimples {
     int valor;
     struct NoSimples *prox;
@@ -75,4 +78,36 @@ void liberarLista(NoSimples *head) {
         head = head->prox;
         free(temp);
     }
+}
+
+int main() {
+
+    NoSimples *lista = NULL;
+    NoSimples *lista1 = NULL;
+    NoSimples *lista2 = NULL;
+
+    /* Inserindo elementos */
+    inserirFinal(&lista, 10);
+    inserirFinal(&lista, 20);
+    inserirFinal(&lista, 30);
+    inserirFinal(&lista, 40);
+    inserirFinal(&lista, 50);
+
+    printf("Lista original:\n");
+    exibirLista(lista);
+
+    /* Dividindo a lista */
+    dividirLista(lista, &lista1, &lista2);
+
+    printf("\nPrimeira metade:\n");
+    exibirLista(lista1);
+
+    printf("\nSegunda metade:\n");
+    exibirLista(lista2);
+
+    /* Liberando memória */
+    liberarLista(lista1);
+    liberarLista(lista2);
+
+    return 0;
 }
