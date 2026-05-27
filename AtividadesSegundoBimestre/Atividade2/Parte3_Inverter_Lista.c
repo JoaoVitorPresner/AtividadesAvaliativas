@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct NoSimples {
     int valor;
     struct NoSimples *prox;
@@ -60,4 +63,28 @@ void inverterLista(NoSimples **head) {
     }
 
     *head = anterior;
+}
+
+int main() {
+
+    NoSimples *lista = NULL;
+
+    /* Inserindo valores */
+    inserirFinal(&lista, 10);
+    inserirFinal(&lista, 20);
+    inserirFinal(&lista, 30);
+    inserirFinal(&lista, 40);
+
+    /* Exibindo lista original */
+    printf("Lista original:\n");
+    exibirLista(lista);
+
+    /* Invertendo lista */
+    inverterLista(&lista);
+
+    /* Exibindo lista invertida */
+    printf("\nLista invertida:\n");
+    exibirLista(lista);
+
+    return 0;
 }
