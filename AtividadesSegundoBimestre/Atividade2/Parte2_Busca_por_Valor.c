@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct NoSimples {
     int valor;
     struct NoSimples *prox;
@@ -59,4 +62,34 @@ int buscarValor(NoSimples *head, int valor) {
     }
 
     return -1;
+}
+
+int main() {
+
+    NoSimples *lista = NULL;
+
+    /* Inserindo valores */
+    inserirFinal(&lista, 10);
+    inserirFinal(&lista, 20);
+    inserirFinal(&lista, 30);
+    inserirFinal(&lista, 40);
+
+    /* Exibindo lista */
+    printf("Lista encadeada:\n");
+    exibirLista(lista);
+
+    /* Buscando valor */
+    int valorBusca = 30;
+
+    int posicao = buscarValor(lista, valorBusca);
+
+    if (posicao != -1) {
+        printf("Valor %d encontrado na posicao %d\n",
+               valorBusca, posicao);
+    } else {
+        printf("Valor %d nao encontrado na lista\n",
+               valorBusca);
+    }
+
+    return 0;
 }
