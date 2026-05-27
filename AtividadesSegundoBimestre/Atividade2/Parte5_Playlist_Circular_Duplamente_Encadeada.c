@@ -7,7 +7,9 @@ typedef struct NoPlaylist {
     struct NoPlaylist *ant;
 } NoPlaylist;
 
-/* Copiar string manualmente */
+/* =========================
+   COPIAR TEXTO
+   ========================= */
 void copiarTexto(char destino[], char origem[]) {
     int i = 0;
 
@@ -19,9 +21,28 @@ void copiarTexto(char destino[], char origem[]) {
     destino[i] = '\0';
 }
 
-/* Criar nó playlist */
+/* Remover ENTER do fgets */
+void removerEnter(char texto[]) {
+    int i = 0;
+
+    while (texto[i] != '\0') {
+
+        if (texto[i] == '\n') {
+            texto[i] = '\0';
+            return;
+        }
+
+        i++;
+    }
+}
+
+/* =========================
+   CRIAR MÚSICA
+   ========================= */
 NoPlaylist* criarMusica(char nome[]) {
-    NoPlaylist *novo = (NoPlaylist*) malloc(sizeof(NoPlaylist));
+
+    NoPlaylist *novo =
+        (NoPlaylist*) malloc(sizeof(NoPlaylist));
 
     if (novo == NULL) {
         printf("Erro de alocacao!\n");
@@ -36,14 +57,19 @@ NoPlaylist* criarMusica(char nome[]) {
     return novo;
 }
 
-/* Adicionar música */
+/* =========================
+   ADICIONAR MÚSICA
+   ========================= */
 void adicionarMusica(NoPlaylist **head, char nome[]) {
+
     NoPlaylist *novo = criarMusica(nome);
 
     /* Lista vazia */
     if (*head == NULL) {
+
         novo->prox = novo;
         novo->ant = novo;
+
         *head = novo;
         return;
     }
@@ -57,39 +83,54 @@ void adicionarMusica(NoPlaylist **head, char nome[]) {
     (*head)->ant = novo;
 }
 
-/* Próxima música */
+/* =========================
+   PRÓXIMA MÚSICA
+   ========================= */
 void proximaMusica(NoPlaylist **atual) {
+
     if (*atual != NULL) {
         *atual = (*atual)->prox;
     }
 }
 
-/* Música anterior */
+/* =========================
+   MÚSICA ANTERIOR
+   ========================= */
 void musicaAnterior(NoPlaylist **atual) {
+
     if (*atual != NULL) {
         *atual = (*atual)->ant;
     }
 }
 
-/* Exibir playlist */
+/* =========================
+   EXIBIR PLAYLIST
+   ========================= */
 void exibirPlaylist(NoPlaylist *head) {
+
     if (head == NULL) {
-        printf("Playlist vazia!\n");
+        printf("\nPlaylist vazia!\n");
         return;
     }
 
     NoPlaylist *temp = head;
 
+    printf("\n=== PLAYLIST ===\n");
+
     do {
         printf("[%s] <-> ", temp->musica);
         temp = temp->prox;
-    } while (temp != head);
+    }
+    while (temp != head);
 
     printf("(volta ao inicio)\n");
 }
 
-/* Total de músicas */
+/* =========================
+   TOTAL DE MÚSICAS
+   ========================= */
 int totalMusicas(NoPlaylist *head) {
+
     if (head == NULL) {
         return 0;
     }
@@ -100,30 +141,40 @@ int totalMusicas(NoPlaylist *head) {
     do {
         contador++;
         temp = temp->prox;
-    } while (temp != head);
+    }
+    while (temp != head);
 
     return contador;
 }
 
-/* Tocar playlist uma vez completa */
+/* =========================
+   TOCAR PLAYLIST
+   ========================= */
 void tocarPlaylist(NoPlaylist *head) {
+
     if (head == NULL) {
-        printf("Playlist vazia!\n");
+        printf("\nPlaylist vazia!\n");
         return;
     }
 
     NoPlaylist *atual = head;
 
+    printf("\n=== TOCANDO PLAYLIST ===\n");
+
     do {
         printf("Tocando: %s\n", atual->musica);
         atual = atual->prox;
-    } while (atual != head);
+    }
+    while (atual != head);
 
-    printf("Todas as musicas foram tocadas!\n");
+    printf("Fim da playlist!\n");
 }
 
-/* Liberar playlist */
+/* =========================
+   LIBERAR MEMÓRIA
+   ========================= */
 void liberarPlaylist(NoPlaylist *head) {
+
     if (head == NULL) {
         return;
     }
@@ -131,8 +182,10 @@ void liberarPlaylist(NoPlaylist *head) {
     NoPlaylist *temp = head->prox;
 
     while (temp != head) {
+
         NoPlaylist *aux = temp;
         temp = temp->prox;
+
         free(aux);
     }
 
@@ -140,50 +193,137 @@ void liberarPlaylist(NoPlaylist *head) {
 }
 
 /* =========================
+   MENU
+   ========================= */
+void menu() {
+
+    printf("\n=========== MENU ===========\n");
+    printf("1 - Adicionar musica\n");
+    printf("2 - Exibir playlist\n");
+    printf("3 - Mostrar musica atual\n");
+    printf("4 - Proxima musica\n");
+    printf("5 - Musica anterior\n");
+    printf("6 - Total de musicas\n");
+    printf("7 - Tocar playlist\n");
+    printf("0 - Sair\n");
+    printf("============================\n");
+
+    printf("Escolha: ");
+}
+
+/* =========================
    MAIN
    ========================= */
-
 int main() {
 
     NoPlaylist *playlist = NULL;
     NoPlaylist *atual = NULL;
 
-    /* Adicionando músicas */
-    adicionarMusica(&playlist, "Bohemian Rhapsody");
-    adicionarMusica(&playlist, "Imagine");
-    adicionarMusica(&playlist, "Hotel California");
-    adicionarMusica(&playlist, "Billie Jean");
+    int opcao;
+    char nome[100];
 
-    printf("=== PLAYLIST ===\n");
-    exibirPlaylist(playlist);
+    do {
 
-    /* Total de músicas */
-    printf("\nTotal de musicas: %d\n",
-           totalMusicas(playlist));
+        menu();
+        scanf("%d", &opcao);
 
-    /* Definir música atual */
-    atual = playlist;
+        getchar(); /* Limpar ENTER */
 
-    printf("\nMusica atual: %s\n",
-           atual->musica);
+        switch (opcao) {
 
-    /* Próxima música */
-    proximaMusica(&atual);
+            case 1:
 
-    printf("Proxima musica: %s\n",
-           atual->musica);
+                printf("\nDigite o nome da musica: ");
+                fgets(nome, 100, stdin);
 
-    /* Música anterior */
-    musicaAnterior(&atual);
+                removerEnter(nome);
 
-    printf("Musica anterior: %s\n",
-           atual->musica);
+                adicionarMusica(&playlist, nome);
 
-    /* Tocar playlist */
-    printf("\n=== TOCANDO PLAYLIST ===\n");
-    tocarPlaylist(playlist);
+                /* Definir primeira música atual */
+                if (atual == NULL) {
+                    atual = playlist;
+                }
 
-    /* Liberar memória */
+                printf("Musica adicionada!\n");
+
+                break;
+
+            case 2:
+
+                exibirPlaylist(playlist);
+
+                break;
+
+            case 3:
+
+                if (atual == NULL) {
+                    printf("\nNenhuma musica na playlist!\n");
+                }
+                else {
+                    printf("\nMusica atual: %s\n",
+                           atual->musica);
+                }
+
+                break;
+
+            case 4:
+
+                if (atual == NULL) {
+                    printf("\nPlaylist vazia!\n");
+                }
+                else {
+
+                    proximaMusica(&atual);
+
+                    printf("\nProxima musica: %s\n",
+                           atual->musica);
+                }
+
+                break;
+
+            case 5:
+
+                if (atual == NULL) {
+                    printf("\nPlaylist vazia!\n");
+                }
+                else {
+
+                    musicaAnterior(&atual);
+
+                    printf("\nMusica anterior: %s\n",
+                           atual->musica);
+                }
+
+                break;
+
+            case 6:
+
+                printf("\nTotal de musicas: %d\n",
+                       totalMusicas(playlist));
+
+                break;
+
+            case 7:
+
+                tocarPlaylist(playlist);
+
+                break;
+
+            case 0:
+
+                printf("\nEncerrando programa...\n");
+
+                break;
+
+            default:
+
+                printf("\nOpcao invalida!\n");
+        }
+
+    }
+    while (opcao != 0);
+
     liberarPlaylist(playlist);
 
     return 0;
