@@ -13,8 +13,8 @@ typedef struct No {
 No *tabela[TAM];
 
 int totalElementos = 0;
-int totalColisoes = 0;
 
+/* Função Hash */
 int funcaoHash(char *palavra) {
     int soma = 0;
 
@@ -25,18 +25,33 @@ int funcaoHash(char *palavra) {
     return soma % TAM;
 }
 
+/* Inserir palavra */
 void inserir(char *palavra, char *definicao) {
+
     int indice = funcaoHash(palavra);
 
-    No *novo = (No *)malloc(sizeof(No));
+    No *atual = tabela[indice];
+
+    /* Verifica duplicidade */
+    while (atual != NULL) {
+
+        if (strcmp(atual->palavra, palavra) == 0) {
+            printf("Erro: palavra ja cadastrada!\n");
+            return;
+        }
+
+        atual = atual->prox;
+    }
+
+    No *novo = (No *) malloc(sizeof(No));
+
+    if (novo == NULL) {
+        printf("Erro de alocacao de memoria!\n");
+        return;
+    }
 
     strcpy(novo->palavra, palavra);
     strcpy(novo->definicao, definicao);
-    novo->prox = NULL;
-
-    if (tabela[indice] != NULL) {
-        totalColisoes++;
-    }
 
     novo->prox = tabela[indice];
     tabela[indice] = novo;
@@ -46,24 +61,32 @@ void inserir(char *palavra, char *definicao) {
     printf("Palavra inserida com sucesso!\n");
 }
 
+/* Buscar palavra */
 void buscar(char *palavra) {
+
     int indice = funcaoHash(palavra);
 
     No *atual = tabela[indice];
 
     while (atual != NULL) {
+
         if (strcmp(atual->palavra, palavra) == 0) {
+
             printf("\nPalavra: %s\n", atual->palavra);
             printf("Definicao: %s\n", atual->definicao);
+
             return;
         }
+
         atual = atual->prox;
     }
 
     printf("Palavra nao encontrada!\n");
 }
 
+/* Remover palavra */
 void removerPalavra(char *palavra) {
+
     int indice = funcaoHash(palavra);
 
     No *atual = tabela[indice];
@@ -80,9 +103,11 @@ void removerPalavra(char *palavra) {
             }
 
             free(atual);
+
             totalElementos--;
 
-            printf("Palavra removida!\n");
+            printf("Palavra removida com sucesso!\n");
+
             return;
         }
 
@@ -93,7 +118,9 @@ void removerPalavra(char *palavra) {
     printf("Palavra nao encontrada!\n");
 }
 
+/* Exibir tabela hash */
 void exibirTabela() {
+
     printf("\n===== TABELA HASH =====\n");
 
     for (int i = 0; i < TAM; i++) {
@@ -103,7 +130,9 @@ void exibirTabela() {
         No *atual = tabela[i];
 
         while (atual != NULL) {
+
             printf("(%s) -> ", atual->palavra);
+
             atual = atual->prox;
         }
 
@@ -111,12 +140,16 @@ void exibirTabela() {
     }
 }
 
+/* Estatísticas */
 void estatisticas() {
+
     int maiorLista = 0;
+    int totalColisoes = 0;
 
     for (int i = 0; i < TAM; i++) {
 
         int contador = 0;
+
         No *atual = tabela[i];
 
         while (atual != NULL) {
@@ -126,6 +159,10 @@ void estatisticas() {
 
         if (contador > maiorLista) {
             maiorLista = contador;
+        }
+
+        if (contador > 1) {
+            totalColisoes += (contador - 1);
         }
     }
 
@@ -138,9 +175,30 @@ void estatisticas() {
     printf("Maior lista encadeada: %d\n", maiorLista);
 }
 
+/* Liberar memória */
+void liberarTabela() {
+
+    for (int i = 0; i < TAM; i++) {
+
+        No *atual = tabela[i];
+
+        while (atual != NULL) {
+
+            No *temp = atual;
+
+            atual = atual->prox;
+
+            free(temp);
+        }
+
+        tabela[i] = NULL;
+    }
+}
+
 int main() {
 
     int opcao;
+
     char palavra[50];
     char definicao[200];
 
@@ -158,12 +216,14 @@ int main() {
         printf("5 - Estatisticas\n");
         printf("0 - Sair\n");
         printf("Opcao: ");
+
         scanf("%d", &opcao);
         getchar();
 
-        switch(opcao) {
+        switch (opcao) {
 
             case 1:
+
                 printf("Palavra: ");
                 fgets(palavra, sizeof(palavra), stdin);
                 palavra[strcspn(palavra, "\n")] = '\0';
@@ -173,37 +233,51 @@ int main() {
                 definicao[strcspn(definicao, "\n")] = '\0';
 
                 inserir(palavra, definicao);
+
                 break;
 
             case 2:
+
                 printf("Digite a palavra: ");
                 fgets(palavra, sizeof(palavra), stdin);
                 palavra[strcspn(palavra, "\n")] = '\0';
 
                 buscar(palavra);
+
                 break;
 
             case 3:
+
                 printf("Digite a palavra: ");
                 fgets(palavra, sizeof(palavra), stdin);
                 palavra[strcspn(palavra, "\n")] = '\0';
 
                 removerPalavra(palavra);
+
                 break;
 
             case 4:
+
                 exibirTabela();
+
                 break;
 
             case 5:
+
                 estatisticas();
+
                 break;
 
             case 0:
-                printf("Encerrando...\n");
+
+                liberarTabela();
+
+                printf("Programa encerrado!\n");
+
                 break;
 
             default:
+
                 printf("Opcao invalida!\n");
         }
 
