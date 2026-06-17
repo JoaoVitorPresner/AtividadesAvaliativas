@@ -28,6 +28,7 @@ Caso LL (Left-Left).
    10    30
 ```
 
+---
 
 ### Rotação Simples à Esquerda
 
@@ -57,6 +58,7 @@ Caso RR (Right-Right).
    10    30
 ```
 
+---
 
 ### Rotação Dupla Esquerda-Direita (LR)
 
@@ -82,6 +84,7 @@ Corrigir um desequilíbrio onde a inserção ocorre à direita da subárvore esq
    10    30
 ```
 
+---
 
 ### Rotação Dupla Direita-Esquerda (RL)
 
@@ -107,6 +110,7 @@ Corrigir um desequilíbrio onde a inserção ocorre à esquerda da subárvore di
    10    30
 ```
 
+---
 
 ### Inversão (Espelhamento)
 
