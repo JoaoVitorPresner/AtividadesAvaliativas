@@ -1,133 +1,131 @@
-1. AVL
+#Tipos de Árvores
 
--Conceito
+## AVL
 
-A árvore AVL é uma Árvore Binária de Busca (BST) auto balanceada, criada por Adelson-Velsky e Landis. Ela mantém a diferença de altura entre as subárvores esquerda e direita de cada nó em no máximo 1.
+### Conceito
 
--Características
+A árvore AVL é uma Árvore Binária de Busca (BST) auto balanceada criada por Adelson-Velsky e Landis. Ela mantém a diferença de altura entre as subárvores esquerda e direita de cada nó em no máximo 1.
 
-Árvore binária.
+### Características
 
-Possui balanceamento automático.
+* Estrutura binária de busca.
+* Balanceamento automático.
+* Utiliza rotações para corrigir desequilíbrios.
+* Mantém altura próxima do ideal.
 
-Utiliza rotações para corrigir desequilíbrios.
+### Vantagens
 
-Mantém operações eficientes.
+* Busca muito eficiente.
+* Desempenho previsível.
+* Menor altura da árvore.
 
--Vantagens
+### Desvantagens
 
-Busca muito rápida.
+* Inserções e remoções mais complexas.
+* Maior número de rotações.
+* Implementação mais trabalhosa.
 
-Altura sempre próxima do ideal.
+### Exemplo Ilustrado
 
-Desempenho previsível.
-
--Desvantagens
-
-Inserção mais complexa.
-
-Maior quantidade de rotações.
-
-Consome mais processamento para manter o balanceamento.
-
-Exemplo
-      
+```text
       30
      /  \
    20    40
-   /
- 10
+  /
+10
+```
 
-Após inserções que causem desequilíbrio, rotações são realizadas para manter a árvore balanceada.
+Após o balanceamento:
 
-2. Rubro-Negra
+```text
+      20
+     /  \
+   10    30
+           \
+            40
+```
 
--Conceito
+---
 
-É uma árvore binária de busca balanceada que utiliza cores (vermelho e preto) para controlar o balanceamento.
+## Rubro-Negra
 
--Regras de Coloração
+### Conceito
 
-Todo nó é vermelho ou preto.
+A árvore Rubro-Negra é uma árvore binária de busca balanceada que utiliza nós vermelhos e pretos para controlar seu balanceamento.
 
-A raiz sempre é preta.
+### Regras de Coloração
 
-Folhas nulas são pretas.
+1. Todo nó é vermelho ou preto.
+2. A raiz sempre é preta.
+3. Folhas nulas são pretas.
+4. Um nó vermelho não pode ter filho vermelho.
+5. Todos os caminhos da raiz até as folhas devem possuir a mesma quantidade de nós pretos.
 
-Um nó vermelho não pode ter filho vermelho.
+### Vantagens
 
-Todos os caminhos da raiz até uma folha possuem a mesma quantidade de nós pretos.
+* Menos rotações que AVL.
+* Inserções e remoções rápidas.
+* Muito utilizada em sistemas reais.
 
--Vantagens
+### Desvantagens
 
-Menos rotações que AVL.
+* Implementação complexa.
+* Balanceamento menos rigoroso que AVL.
 
-Inserções e remoções eficientes.
+### Exemplo Ilustrado
 
-Muito utilizada em bibliotecas de sistemas.
+```text
+         20(P)
+        /     \
+    10(V)    30(V)
+```
 
--Desvantagens
+Legenda:
 
-Implementação mais complexa.
+* P = Preto
+* V = Vermelho
 
-Balanceamento menos rigoroso que AVL.
+---
 
-Exemplo
-        20(P)
-       /     \
-   10(V)    30(V)
+## N-ária
 
-P = Preto
-V = Vermelho
+### Conceito
 
-3. N-ária
+A árvore N-ária é uma estrutura em que cada nó pode possuir vários filhos, diferentemente das árvores binárias que permitem apenas dois.
 
--Conceito
+### Diferenças em Relação às Árvores Binárias
 
-Árvore onde cada nó pode possuir vários filhos, não ficando limitada a apenas dois.
+| Característica   | Árvore Binária | Árvore N-ária |
+| ---------------- | -------------- | ------------- |
+| Número de filhos | Até 2          | Vários        |
+| Estrutura        | Mais simples   | Mais flexível |
+| Uso comum        | Busca de dados | Hierarquias   |
 
--Diferenças para Árvores Binárias
-Árvore Binária	                  
+### Vantagens
 
-Até 2 filhos	                 
+* Representa hierarquias naturalmente.
+* Suporta muitos filhos por nó.
+* Menor profundidade em alguns casos.
 
-Estrutura mais simples	      
+### Desvantagens
 
-Usada em buscas	               
+* Implementação mais complexa.
+* Pode consumir mais memória.
 
- Árvore N-ária
+### Exemplo Ilustrado
 
- Vários filhos
+```text
+           A
+      /    |    \
+     B     C     D
+   / | \
+  E  F  G
+```
 
- Estrutura mais flexível
+### Aplicações Práticas
 
- Usada em hierarquias
-
-
-
--Vantagens
-
-Representa hierarquias naturalmente.
-
-Menor profundidade em alguns casos.
-
-Organização mais intuitiva.
-
--Desvantagens
-
-Implementação mais complexa.
-
-Pode exigir mais memória.
-
--Exemplo
-                         A
-                    /    |    \
-                   B     C     D
-                 / | \
-                E  F  G
-
-Aplicações Práticas
-Sistema de arquivos.
-Menus de programas.
-Organogramas.
-Estruturas XML e HTML.
+* Sistema de arquivos.
+* Menus de programas.
+* Estruturas XML e HTML.
+* Organogramas empresariais.
+* Taxonomias e classificações.
