@@ -1,4 +1,4 @@
-## Parte 2 – Operações em Árvores
+## Operações em Árvores
 
 ### Rotação Simples à Direita
 
