@@ -57,7 +57,6 @@ Caso RR (Right-Right).
    10    30
 ```
 
----
 
 ### Rotação Dupla Esquerda-Direita (LR)
 
